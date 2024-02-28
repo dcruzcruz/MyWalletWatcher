@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyWalletWatcher ERD</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .table-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .table {
+      border-collapse: collapse;
+      width: 300px;
+      margin: 10px;
+    }
+
+    .table th,
+    .table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .table th {
+      background-color: #f2f2f2;
+    }
+
+    .relationship {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>MyWalletWatcher: Managing Your Personal Finances with Ease</h2>
+
+  <p>
+    MyWalletWatcher is a robust web application designed to revolutionize the way individuals manage their personal finances.
+    In the dynamic landscape of personal finance, staying in control of your money requires efficient tools, and that's exactly
+    what MyWalletWatcher offers.
+  </p>
+
+  <p>
+    <strong>Key Features:</strong>
+  </p>
+  <ol>
+    <li><strong>Accounts Management:</strong> Create and manage multiple financial accounts, keeping your assets and liabilities organized.</li>
+    <li><strong>Transaction Tracking:</strong> Record detailed transactions, including date, amount, type, and description.</li>
+    <li><strong>Categorization and Tagging:</strong> Classify transactions to understand spending patterns using categories and tags.</li>
+    <li><strong>Holistic View:</strong> Gain a comprehensive overview of balances, transaction history, and categorized summaries.</li>
+    <li><strong>Household Member Integration:</strong> Collaborative financial planning by linking accounts and transactions to specific household members.</li>
+    <li><strong>Insightful Reporting:</strong> Generate reports with data visualization to understand financial trends over time.</li>
+  </ol>
+
+  <p>
+    <strong>Purpose and Objectives:</strong>
+  </p>
+  <ol>
+    <li><strong>Simplify Financial Management:</strong> Provide a user-friendly platform that simplifies the process of managing personal finances.</li>
+    <li><strong>Facilitate Informed Decision-Making:</strong> Equip users with tools and insights to make informed financial decisions.</li>
+    <li><strong>Promote Financial Accountability:</strong> Encourage accountability and transparency in financial matters, especially in shared households.</li>
+    <li><strong>Enhance Financial Awareness:</strong> Foster financial awareness by offering detailed insights into spending habits and income sources.</li>
+    <li><strong>Encourage Goal Setting:</strong> Assist users in setting and achieving financial goals, whether related to savings, reducing debt, or planning for expenses.</li>
+  </ol>
+
+  <p>
+    MyWalletWatcher is more than just a financial tracking tool; it's a partner in your journey towards financial well-being.
+    By providing a clear, organized, and insightful view of your personal finances, the application empowers you to make proactive
+    and informed decisions for a secure financial future.
+  </p>
+
+  <h2>MyWalletWatcher ERD</h2>
+
+  <div class="table-container">
+    <table class="table">
+      <caption>Accounts</caption>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Data Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>household_member_id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>account_name</td>
+          <td>String</td>
+        </tr>
+        <tr>
+          <td>balance</td>
+          <td>Decimal (10, 2)</td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>Datetime</td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>Datetime</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table">
+      <caption>Categories</caption>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Data Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>category_name</td>
+          <td>String</td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>Datetime</td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>Datetime</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table">
+      <caption>Household Members</caption>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Data Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td>String</td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>Datetime</td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>Datetime</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table">
+      <caption>Tags</caption>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Data Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>tag_name</td>
+          <td>String</td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>Datetime</td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>Datetime</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table">
+      <caption>Transaction Categories</caption>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Data Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>transaction_id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>category_id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>Datetime</td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>Datetime</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table">
+      <caption>Transaction Tags</caption>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Data Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>transaction_id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>tag_id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>Datetime</td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>Datetime</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table">
+      <caption>Transactions</caption>
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Data Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>account_id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>household_member_id</td>
+          <td>Integer</td>
+        </tr>
+        <tr>
+          <td>transaction_type</td>
+          <td>String</td>
+        </tr>
+        <tr>
+          <td>amount</td>
+          <td>Decimal (10, 2)</td>
+        </tr>
+        <tr>
+          <td>date</td>
+          <td>Date</td>
+        </tr>
+        <tr>
+          <td>description</td>
+          <td>String</td>
+        </tr>
+        <tr>
+          <td>created_at</td>
+          <td>Datetime</td>
+        </tr>
+        <tr>
+          <td>updated_at</td>
+          <td>Datetime</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+  <div class="relationship">
+    <h3>Relationships</h3>
+    <p><strong>Accounts:</strong> Each account belongs to a household member. Use the <code>household_member_id</code> foreign key to establish this relationship.</p>
+
+    <p><strong>Transactions:</strong> Transactions are linked to both an account and a household member. Utilize the <code>account_id</code> and <code>household_member_id</code> foreign keys to connect transactions to their respective accounts and household members.</p>
+
+    <p><strong>Transaction Categories:</strong> Transactions have multiple categories through the <code>TransactionCategories</code> table. Use the <code>transaction_id</code> and <code>category_id</code> foreign keys to establish a many-to-many relationship between transactions and categories.</p>
+
+    <p><strong>Transaction Tags:</strong> Similar to categories, transactions can have multiple tags via the <code>TransactionTags</code> table. Use the <code>transaction_id</code> and <code>tag_id</code> foreign keys for a many-to-many relationship between transactions and tags.</p>
+
+    <p><em>Note: Ensure proper ActiveRecord associations in your models for seamless navigation and data retrieval.</em></p>
+  </div>
+
+</body>
+
+</html>
