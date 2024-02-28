@@ -1,0 +1,28 @@
+<h1>Household Members</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @household_members.each do |member| %>
+      <tr>
+        <td><%= member.name %></td>
+        <td>
+          <%= link_to 'Show', household_member_path(member) %> |
+          <%= link_to 'Edit', edit_household_member_path(member) %> |
+          <%= link_to "Destroy", household_member_path(member), data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure? it will also delete associated accounts,and when you delete an account, it will also delete associated transactions"
+            } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Household Member', new_household_member_path %>
+<%= link_to 'Go Home', root_path %>

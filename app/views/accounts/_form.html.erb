@@ -1,0 +1,33 @@
+<%= form_with(model: account, local: true) do |form| %>
+  <% if account.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
+
+      <ul>
+        <% account.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :household_member_id %>
+    <%= form.collection_select :household_member_id, HouseholdMember.all, :id, :name %>
+    <!-- Adjust the collection_select parameters based on your actual association and model attributes -->
+  </div>
+
+  <div class="field">
+    <%= form.label :account_name %>
+    <%= form.text_field :account_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :balance %>
+    <%= form.number_field :balance, step: '0.01' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

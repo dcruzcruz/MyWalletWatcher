@@ -1,0 +1,41 @@
+<h1>Transactions</h1>
+
+<%= paginate @transactions %>
+<table>
+  <thead>
+    <tr>
+      <th>Household Member</th>
+      <th>Account</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Tag</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.account.household_member.name %></td>
+        <td><%= transaction.account.account_name %></td>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.date %></td>
+        <td><%= transaction.description %></td>
+        <td><%= transaction.categories.map(&:category_name).join(', ') %></td>
+        <td><%= transaction.tags.map(&:tag_name).join(', ') %></td>
+        <td>
+          <%= link_to 'Show', transaction_path(transaction) %> |
+          <%= link_to 'Edit', edit_transaction_path(transaction) %> |
+          <%= link_to "Destroy", transaction_path(transaction), data: {
+            turbo_method: :delete,turbo_confirm: "Are you sure?"} %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Transaction', new_transaction_path %>
+<%= link_to 'Go Home', root_path %>

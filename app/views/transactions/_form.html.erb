@@ -1,0 +1,56 @@
+<%= form_with(model: @transaction, local: true) do |form| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+        <% @transaction.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :household_member_id, 'Household Member' %>
+    <%= form.collection_select :household_member_id, HouseholdMember.all, :id, :name, prompt: 'Select Household Member' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :account_id, 'Account' %>
+    <%= form.collection_select :account_id, Account.all, :id, :account_name, prompt: 'Select Account' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transaction_type %>
+    <%= form.select :transaction_type, %w[Income Expense], prompt: 'Select Transaction Type' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.number_field :amount, step: '0.01', placeholder: 'Enter amount' %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, placeholder: 'Enter description' %>
+  </div>
+
+  <!-- Nested Attributes -->
+  <%= form.fields_for :transaction_categories do |category_fields| %>
+    <%= category_fields.collection_select(:category_id, Category.all, :id, :category_name, { prompt: 'Select Category' }) %>
+  <% end %>
+
+  <%= form.fields_for :transaction_tags do |tag_fields| %>
+    <%= tag_fields.collection_select(:tag_id, Tag.all, :id, :tag_name, { prompt: 'Select Tag' }) %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

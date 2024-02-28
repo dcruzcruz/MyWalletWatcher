@@ -1,0 +1,13 @@
+<h1>Transaction Details</h1>
+
+<p><strong>Household Member:</strong> <%= @transaction.account.household_member.name %></p>
+<p><strong>Account:</strong> <%= @transaction.account.account_name %></p>
+<p><strong>Type:</strong> <%= @transaction.transaction_type %></p>
+<p><strong>Amount:</strong> <%= @transaction.amount %></p>
+<p><strong>Date:</strong> <%= @transaction.date %></p>
+<p><strong>Description:</strong> <%= @transaction.description %></p>
+<p><strong>Category:</strong> <%= @transaction.categories.map(&:category_name).join(', ') %></p>
+<p><strong>Tag:</strong> <%= @transaction.tags.map(&:tag_name).join(', ') %></p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back to Transactions', transactions_path %>
