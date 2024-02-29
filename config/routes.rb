@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :accounts
   #resources :transactions
   resources :household_members
+  resources :institutions
 
   resources :categories
   resources :tags

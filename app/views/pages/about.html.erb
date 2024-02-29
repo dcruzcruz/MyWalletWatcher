@@ -12,14 +12,14 @@
   <ul>
     <li><strong>CSV Spreadsheets:</strong>
       <ul>
-        <li>Populates initial datasets for <code>accounts</code>, <code>household_members</code>, <code>categories</code>, and <code>tags</code>.</li>
-        <li>Represents foundational financial accounts, household members, and transaction categories/tags.</li>
+        <li>Populates initial datasets for <code>accounts</code>, <code>institutions</code>, <code>household_members</code>, <code>categories</code>, and <code>tags</code>.</li>
+        <li>Represents foundational financial accounts, institutions, household members, and transaction categories/tags.</li>
       </ul>
     </li>
 
     <li><strong>Faker Gem:</strong>
       <ul>
-        <li>Generates 200 synthetic records for the <code>transactions</code> table.</li>
+        <li>Generates 300 synthetic records for the <code>transactions</code> table.</li>
         <li>Ensures a diverse dataset for testing and development purposes.</li>
       </ul>
     </li>
@@ -34,7 +34,7 @@
 
   <h2>Entity-Relationship Diagram (ERD)</h2>
   <figure class="figure">
-    <%= image_tag('erd.jpg', alt: 'ERD', style: 'width: 80%; height: auto;') %>
+    <%= image_tag('erd.drawio.png', alt: 'ERD', style: 'width: 80%; height: auto;') %>
   </figure>
   <p>
     This diagram illustrates the relationships between different models in our database.

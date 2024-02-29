@@ -86,3 +86,5 @@ gem 'turbolinks'
 gem 'will_paginate'
 
 gem 'will_paginate-bootstrap'
+gem "figaro", "~> 1.2"
+gem 'httparty'

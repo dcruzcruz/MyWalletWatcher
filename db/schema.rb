@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_23_221654) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_29_082504) do
   create_table "accounts", force: :cascade do |t|
     t.integer "household_member_id"
+    t.integer "institution_id"
     t.string "account_name"
     t.decimal "balance", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["household_member_id"], name: "index_accounts_on_household_member_id"
+    t.index ["institution_id"], name: "index_accounts_on_institution_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -28,6 +30,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_221654) do
 
   create_table "household_members", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "institutions", force: :cascade do |t|
+    t.string "name"
+    t.float "latitude"
+    t.float "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,6 +80,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_23_221654) do
   end
 
   add_foreign_key "accounts", "household_members"
+  add_foreign_key "accounts", "institutions"
   add_foreign_key "transaction_categories", "categories"
   add_foreign_key "transaction_categories", "transactions"
   add_foreign_key "transaction_tags", "tags"

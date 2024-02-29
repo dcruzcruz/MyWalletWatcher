@@ -1,10 +1,6 @@
 <h1>Transactions</h1>
-
-<div class="btn-group" role="group" aria-label="Basic example">
   <%= paginate @transactions %>
   <%= link_to 'New Transaction', new_transaction_path, class: 'btn btn-dark' %>
-</div>
-
 <table class="table">
   <thead>
     <tr>
@@ -32,10 +28,6 @@
         <td><%= transaction.tags.map(&:tag_name).join(', ') %></td>
         <td>
           <%= link_to 'Show', transaction_path(transaction), class: 'btn btn-info' %>
-          <%= link_to 'Edit', edit_transaction_path(transaction), class: 'btn btn-warning' %>
-          <%= link_to "Destroy", transaction_path(transaction),
-          class: 'btn btn-danger', data: {
-            turbo_method: :delete,turbo_confirm: "Are you sure?"} %>
         </td>
       </tr>
     <% end %>

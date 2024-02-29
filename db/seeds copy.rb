@@ -1,64 +1,100 @@
-# seeds.rb
+# db/seeds.rb
+require 'csv'
+require 'faker'
 
-# Create household members
-household_member1 = HouseholdMember.create(name: 'John Doe')
-household_member2 = HouseholdMember.create(name: 'Jane Doe')
+# Helper method to handle CSV import
+def import_institutions_from_csv(file_path)
+  CSV.foreach(file_path, headers: true) do |row|
+    institution_params = {
+      name: row['name'],
+      latitude: row['latitude'],
+      longitude: row['longitude']
+    }
 
-# Create accounts
-account1 = Account.create(household_member: household_member1, account_name: 'Savings Account', balance: 1000.00)
-account2 = Account.create(household_member: household_member2, account_name: 'Checking Account', balance: 500.00)
+    institution = Institution.new(institution_params)
+    if institution.save
+      puts "Institution created successfully: #{institution.name}"
+    else
+      puts "Error creating Institution: #{institution.errors.full_messages.join(', ')}"
+    end
+  end
+end
 
 # Create categories
-category1 = Category.create(category_name: 'Groceries')
-category2 = Category.create(category_name: 'Utilities')
-category3 = Category.create(category_name: 'Entertainment')
+category_names = ['Groceries', 'Utilities', 'Entertainment']
+categories = category_names.map { |name| Category.create(category_name: name) }
 
 # Create tags
-tag1 = Tag.create(tag_name: 'Personal')
-tag2 = Tag.create(tag_name: 'Business')
+tag_names = ['Personal', 'Business']
+tags = tag_names.map { |name| Tag.create(tag_name: name) }
 
-# Create transactions
-transaction1 = Transaction.new(account: account1, household_member: household_member1, transaction_type: 'Expense', amount: 50.00, date: Date.today, description: 'Grocery shopping')
-if transaction1.save
-  puts 'Transaction 1 created successfully'
-else
-  puts "Error creating Transaction 1: #{transaction1.errors.full_messages.join(', ')}"
+# Helper method to create random date between two dates
+def random_date_in_range(from, to)
+  rand(from..to)
 end
 
-transaction2 = Transaction.new(account: account2, household_member: household_member2, transaction_type: 'Income', amount: 200.00, date: Date.today, description: 'Salary deposit')
-if transaction2.save
-  puts 'Transaction 2 created successfully'
-else
-  puts "Error creating Transaction 2: #{transaction2.errors.full_messages.join(', ')}"
-end
+# Specify the path to your CSV file
+csv_file_path = 'db/csv/institutions.csv'
 
-# Associate transactions with categories and tags
-transaction_category1 = TransactionCategory.new(transaction_record: transaction1, category: category1)
-if transaction_category1.save
-  puts 'TransactionCategory 1 created successfully'
-else
-  puts "Error creating TransactionCategory 1: #{transaction_category1.errors.full_messages.join(', ')}"
-end
+if File.exist?(csv_file_path)
+  import_institutions_from_csv(csv_file_path)
 
-transaction_tag1 = TransactionTag.new(transaction_record_2: transaction1, tag: tag1)
-if transaction_tag1.save
-  puts 'TransactionTag 1 created successfully'
-else
-  puts "Error creating TransactionTag 1: #{transaction_tag1.errors.full_messages.join(', ')}"
-end
+  # Create 4 household members
+  household_members = 4.times.map do
+    HouseholdMember.create(name: Faker::Name.name)
+  end
 
-transaction_category2 = TransactionCategory.new(transaction_record: transaction2, category: category3)
-if transaction_category2.save
-  puts 'TransactionCategory 2 created successfully'
-else
-  puts "Error creating TransactionCategory 2: #{transaction_category2.errors.full_messages.join(', ')}"
-end
+  # Create 4 accounts for each household member and assign a random institution
+  household_members.each do |household_member|
+    4.times do
+      # Generate a random number
+      random_number = Faker::Number.number(digits: 12)
+      # Choose a random account type
+      account_types = ['Chequing', 'Savings', 'Money MF', 'GICs']
+      random_account_type = account_types.sample
+      # Concatenate the random number and account type to create the account name
+      account_name = "#{random_account_type} #{random_number}"
+      account = Account.create(
+        household_member: household_member,
+        account_name: account_name,
+        balance: Faker::Number.decimal(l_digits: 4, r_digits: 2),
+        institution_id: Institution.all.sample.id
+      )
 
-transaction_tag2 = TransactionTag.new(transaction_record_2: transaction2, tag: tag2)
-if transaction_tag2.save
-  puts 'TransactionTag 2 created successfully'
-else
-  puts "Error creating TransactionTag 2: #{transaction_tag2.errors.full_messages.join(', ')}"
-end
+      # Create 25 transactions for each account with random categories and tags
+      25.times do
+        transaction_type = Faker::Number.between(from: 0, to: 1).zero? ? 'Expense' : 'Income'
+        amount = Faker::Number.decimal(l_digits: 2, r_digits: 2)
+        date = random_date_in_range(Date.new(2024, 1, 1), Date.today)
+        description = Faker::Lorem.sentence
 
-puts 'Seed data has been successfully added.'
+        transaction = Transaction.new(
+          account: account,
+          household_member: household_member,
+          transaction_type: transaction_type,
+          amount: amount,
+          date: date,
+          description: description
+        )
+
+        if transaction.save
+          puts "Transaction created successfully: #{transaction.id}"
+
+          # Assign a random category to the transaction
+          transaction_category = TransactionCategory.new(transaction_record: transaction, category: categories.sample)
+          transaction_category.save
+
+          # Assign a random tag to the transaction
+          transaction_tag = TransactionTag.new(transaction_record_2: transaction, tag: tags.sample)
+          transaction_tag.save
+        else
+          puts "Error creating Transaction: #{transaction.errors.full_messages.join(', ')}"
+        end
+      end
+    end
+  end
+
+  puts 'Seed data has been successfully added.'
+else
+  puts "CSV file not found at #{csv_file_path}. Please provide the correct path."
+end
