@@ -1,24 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <nav>
-  <ul>
-    <li><%= link_to 'Home', root_path %></li>
-    <li><%= link_to 'About', about_path %></li>
-    <!-- Add more menu items as needed -->
-  </ul>
-</nav>
-  <head>
-    <title>MyWalletWatch</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>MyWalletWatcher</title>
+  <!-- Add your stylesheets and other head elements here -->
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <%= link_to 'MyWalletWatcher', root_path, class: 'navbar-brand' %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-  </head>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <%= link_to 'About', about_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'See Accounts', accounts_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'See Household Members', household_members_path, class: 'nav-link' %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'All Transactions', transactions_path, class: 'nav-link' %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-  <body>
+  <div class="container mt-4">
     <%= yield %>
-  </body>
+  </div>
+
+  <!-- Add your JavaScript includes and other body elements here -->
+</body>
 </html>

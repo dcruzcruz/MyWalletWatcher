@@ -7,6 +7,9 @@ class HouseholdMembersController < ApplicationController
 
   def show
     @household_member = HouseholdMember.find(params[:id])
+    @accounts = @household_member.accounts
+    @transactions = @household_member.transactions.includes(:categories, :tags)
+    @total_balance = calculate_total_balance(@accounts)
   end
 
   def new
@@ -49,5 +52,9 @@ class HouseholdMembersController < ApplicationController
 
   def household_member_params
     params.require(:household_member).permit(:name)
+  end
+
+  def calculate_total_balance(accounts)
+    accounts.sum(&:balance)
   end
 end

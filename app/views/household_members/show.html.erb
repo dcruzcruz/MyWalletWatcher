@@ -2,6 +2,55 @@
 
 <p><strong>Name:</strong> <%= @household_member.name %></p>
 
-<%= link_to 'Edit', edit_household_member_path(@household_member) %> |
+<h2>Accounts</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Account Name</th>
+      <th>Balance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.account_name %></td>
+        <td><%= account.balance %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><strong>Total Balance</strong></td>
+      <td><strong><%= @total_balance %></strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Last 10 Transactions:</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Tag</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.last(10).each do |transaction| %>
+      <tr>
+        <td><%= transaction.account.account_name %></td>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.date %></td>
+        <td><%= transaction.description %></td>
+        <td><%= transaction.categories.pluck(:category_name).join(', ') %></td>
+        <td><%= transaction.tags.pluck(:tag_name).join(', ') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Back to Household Members', household_members_path %>
 
