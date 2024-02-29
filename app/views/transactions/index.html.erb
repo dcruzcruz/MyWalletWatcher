@@ -1,6 +1,15 @@
 <h1>Transactions</h1>
-  <%= paginate @transactions %>
+
+<% if params[:search].blank? %>
   <%= link_to 'New Transaction', new_transaction_path, class: 'btn btn-dark' %>
+  <%= paginate @transactions %>
+<% end %>
+
+<%= form_tag(transactions_path, method: :get, class: 'form-inline mt-3') do %>
+  <%= text_field_tag :search, params[:search], class: 'form-control mr-sm-2', placeholder: 'Search by description' %>
+  <%= submit_tag 'Search', class: 'btn btn-outline-success my-2 my-sm-0' %>
+<% end %>
+
 <table class="table">
   <thead>
     <tr>

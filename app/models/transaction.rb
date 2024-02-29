@@ -18,8 +18,6 @@ class Transaction < ApplicationRecord
 
   after_create :update_account_balance
 
-  private
-
   def update_account_balance
     if transaction_type == 'Income'
       account.update(balance: account.balance + amount)

@@ -2,7 +2,12 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   def index
-    @transactions = Transaction.page(params[:page]).per(10)
+    #@transactions = Transaction.page(params[:page]).per(10)
+    if params[:search].present?
+      @transactions = Transaction.where('description LIKE ?', "%#{params[:search]}%")
+    else
+      @transactions = Transaction.page(params[:page]).per(10)
+    end
   end
 
   def show

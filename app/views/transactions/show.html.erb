@@ -9,5 +9,23 @@
 <p><strong>Category:</strong> <%= @transaction.categories.map(&:category_name).join(', ') %></p>
 <p><strong>Tag:</strong> <%= @transaction.tags.map(&:tag_name).join(', ') %></p>
 
+<h1>Transaction Details 2</h1>
+
+<p>Date: <%= @transaction.date %></p>
+<p>Description: <%= @transaction.description %></p>
+<p>Amount: <%= number_to_currency(@transaction.amount) %></p>
+<p>Type: <%= @transaction.transaction_type %></p>
+
+<% if @transaction.amount > 100 %>
+  <p style="color: green;">This transaction amount is above $100. Keep an eye on it!</p>
+<% elsif @transaction.amount < 0 %>
+  <p style="color: red;">This is a withdrawal. Make sure it's intentional.</p>
+<% elsif @transaction.transaction_type == 'expense' %>
+  <p style="color: orange;">This is an expense. Watch your budget!</p>
+<% else %>
+  <p>This transaction appears to be standard.</p>
+<% end %>
+
+
 <%= link_to 'Edit', edit_transaction_path(@transaction) %> |
 <%= link_to 'Back to Transactions', transactions_path %>
