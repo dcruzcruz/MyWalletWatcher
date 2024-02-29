@@ -14,7 +14,8 @@
     <% @accounts.each do |account| %>
       <tr>
         <td><%= account.household_member.name %></td>
-        <td><%= link_to account.account_name, institution_path(account.institution_id), class: 'link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover' %></td>
+        <td><%= link_to account.account_name, institution_path(account.institution_id),
+        class: 'link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover' %></td>
         <td><%= account.account_name %></td>
         <td><%= account.balance %></td>
         <td>

@@ -21,6 +21,14 @@ class Transaction < ApplicationRecord
   private
 
   def update_account_balance
-    account.update_balance!
+    if transaction_type == 'Income'
+      account.update(balance: account.balance + amount)
+    elsif transaction_type == 'Expense' && account.balance >= amount
+      account.update(balance: account.balance - amount)
+    else
+      # In the context of seed data handle the error differently
+      # For example, the output a warning message to the console.
+      puts "Warning: Invalid transaction type or insufficient account balance for seed data."
+    end
   end
 end
