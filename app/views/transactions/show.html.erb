@@ -9,13 +9,6 @@
 <p><strong>Category:</strong> <%= @transaction.categories.map(&:category_name).join(', ') %></p>
 <p><strong>Tag:</strong> <%= @transaction.tags.map(&:tag_name).join(', ') %></p>
 
-<h1>Transaction Details 2</h1>
-
-<p>Date: <%= @transaction.date %></p>
-<p>Description: <%= @transaction.description %></p>
-<p>Amount: <%= number_to_currency(@transaction.amount) %></p>
-<p>Type: <%= @transaction.transaction_type %></p>
-
 <% if @transaction.amount > 100 %>
   <p style="color: green;">This transaction amount is above $100. Keep an eye on it!</p>
 <% elsif @transaction.amount < 0 %>
