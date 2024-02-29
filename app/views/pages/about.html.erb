@@ -1,86 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MyWalletWatcher ERD</title>
-  <style>
-    .table-container {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .table {
-      border-collapse: collapse;
-      width: 300px;
-      margin: 10px;
-    }
-
-    .table th,
-    .table td {
-      border: 1px solid #ddd;
-      padding: 8px;
-      text-align: left;
-    }
-
-    .table th {
-      background-color: #f2f2f2;
-    }
-
-    .relationship {
-      margin-top: 20px;
-    }
-  </style>
 </head>
-
 <body>
-  <h2>MyWalletWatcher: Entity-Relationship Diagram (ERD)</h2>
+  <h2>Datasets</h2>
+  <p>MyWalletWatcher utilizes three primary data sources to comprehensively manage personal finances:</p>
+
+  <ul>
+    <li><strong>CSV Spreadsheets:</strong>
+      <ul>
+        <li>Populates initial datasets for <code>accounts</code>, <code>household_members</code>, <code>categories</code>, and <code>tags</code>.</li>
+        <li>Represents foundational financial accounts, household members, and transaction categories/tags.</li>
+      </ul>
+    </li>
+
+    <li><strong>Faker Gem:</strong>
+      <ul>
+        <li>Generates 200 synthetic records for the <code>transactions</code> table.</li>
+        <li>Ensures a diverse dataset for testing and development purposes.</li>
+      </ul>
+    </li>
+
+    <li><strong>CRUD Functionality:</strong>
+      <ul>
+        <li>Empowers users to interactively manage financial information.</li>
+        <li>Allows Create, Read, Update, and Delete operations for a dynamic user experience.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>Entity-Relationship Diagram (ERD)</h2>
   <figure class="figure">
-    <%= image_tag('erd.jpg', alt: 'ERD') %>
+    <%= image_tag('erd.jpg', alt: 'ERD', style: 'width: 80%; height: auto;') %>
   </figure>
-
   <p>
-  This diagram illustrates the relationships between different models in our database.
+    This diagram illustrates the relationships between different models in our database.
   </p>
-
-  <p>
-    MyWalletWatcher is a robust web application designed to revolutionize the way individuals manage their personal finances.
-    In the dynamic landscape of personal finance, staying in control of your money requires efficient tools, and that's exactly
-    what MyWalletWatcher offers.
-  </p>
-
-  <p>
-    <strong>Key Features:</strong>
-  </p>
-  <ol>
-    <li><strong>Accounts Management:</strong> Create and manage multiple financial accounts, keeping your assets and liabilities organized.</li>
-    <li><strong>Transaction Tracking:</strong> Record detailed transactions, including date, amount, type, and description.</li>
-    <li><strong>Categorization and Tagging:</strong> Classify transactions to understand spending patterns using categories and tags.</li>
-    <li><strong>Holistic View:</strong> Gain a comprehensive overview of balances, transaction history, and categorized summaries.</li>
-    <li><strong>Household Member Integration:</strong> Collaborative financial planning by linking accounts and transactions to specific household members.</li>
-    <li><strong>Insightful Reporting:</strong> Generate reports with data visualization to understand financial trends over time.</li>
-  </ol>
-
-  <p>
-    <strong>Purpose and Objectives:</strong>
-  </p>
-  <ol>
-    <li><strong>Simplify Financial Management:</strong> Provide a user-friendly platform that simplifies the process of managing personal finances.</li>
-    <li><strong>Facilitate Informed Decision-Making:</strong> Equip users with tools and insights to make informed financial decisions.</li>
-    <li><strong>Promote Financial Accountability:</strong> Encourage accountability and transparency in financial matters, especially in shared households.</li>
-    <li><strong>Enhance Financial Awareness:</strong> Foster financial awareness by offering detailed insights into spending habits and income sources.</li>
-    <li><strong>Encourage Goal Setting:</strong> Assist users in setting and achieving financial goals, whether related to savings, reducing debt, or planning for expenses.</li>
-  </ol>
-
-  <p>
-    MyWalletWatcher is more than just a financial tracking tool; it's a partner in your journey towards financial well-being.
-    By providing a clear, organized, and insightful view of your personal finances, the application empowers you to make proactive
-    and informed decisions for a secure financial future.
-  </p>
-
 </body>
-
 </html>
