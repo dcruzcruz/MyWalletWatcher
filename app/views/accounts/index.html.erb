@@ -1,6 +1,7 @@
 <h1>Accounts</h1>
 <%= paginate @accounts %>
-<table>
+<%= link_to 'New Account', new_account_path, class: 'btn btn-dark' %>
+<table class="table">
   <thead>
     <tr>
       <th>Owner</th>
@@ -16,9 +17,10 @@
         <td><%= account.account_name %></td>
         <td><%= account.balance %></td>
         <td>
-          <%= link_to 'Show', account_path(account) %> |
-          <%= link_to 'Edit', edit_account_path(account) %> |
-          <%= link_to "Destroy", account_path(account), data: {
+          <%= link_to 'Show', account_path(account), class: 'btn btn-info' %>
+          <%= link_to 'Edit', edit_account_path(account), class: 'btn btn-warning' %>
+          <%= link_to "Destroy", account_path(account),
+          class: 'btn btn-danger', data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure? when you delete an account, it will also delete associated transactions"
                   } %>
@@ -27,5 +29,3 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to 'New Account', new_account_path %>

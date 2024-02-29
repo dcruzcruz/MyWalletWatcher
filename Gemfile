@@ -75,8 +75,14 @@ end
 
 gem 'kaminari'
 
-gem 'bootstrap'
+gem 'bootstrap', '~> 5.3', '>= 5.3.2'
 
 gem 'sassc-rails'
 
 gem 'jquery-rails'
+
+gem 'turbolinks'
+
+gem 'will_paginate'
+
+gem 'will_paginate-bootstrap'

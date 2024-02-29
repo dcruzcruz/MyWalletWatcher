@@ -11,32 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :household_member_id, 'Household Member' %>
     <%= form.collection_select :household_member_id, HouseholdMember.all, :id, :name, prompt: 'Select Household Member' %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :account_id, 'Account' %>
     <%= form.collection_select :account_id, Account.all, :id, :account_name, prompt: 'Select Account' %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :transaction_type %>
     <%= form.select :transaction_type, %w[Income Expense], prompt: 'Select Transaction Type' %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :amount %>
     <%= form.number_field :amount, step: '0.01', placeholder: 'Enter amount' %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :date %>
     <%= form.date_field :date %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :description %>
     <%= form.text_area :description, placeholder: 'Enter description' %>
   </div>

@@ -11,18 +11,18 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :household_member_id %>
     <%= form.collection_select :household_member_id, HouseholdMember.all, :id, :name %>
     <!-- Adjust the collection_select parameters based on your actual association and model attributes -->
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :account_name %>
     <%= form.text_field :account_name %>
   </div>
 
-  <div class="field">
+  <div class="mb-3">
     <%= form.label :balance %>
     <%= form.number_field :balance, step: '0.01' %>
   </div>
@@ -30,4 +30,5 @@
   <div class="actions">
     <%= form.submit %>
   </div>
+
 <% end %>

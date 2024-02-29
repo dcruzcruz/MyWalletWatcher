@@ -1,9 +1,6 @@
-<h1>Household Member Details</h1>
-
-<p><strong>Name:</strong> <%= @household_member.name %></p>
-
+<h1><%= @household_member.name %> Summary Report</h1>
 <h2>Accounts</h2>
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Account Name</th>
@@ -25,7 +22,7 @@
 </table>
 
 <h2>Last 10 Transactions:</h2>
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Account</th>
