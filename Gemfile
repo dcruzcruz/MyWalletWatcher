@@ -75,3 +75,8 @@ end
 
 gem 'kaminari'
 
+gem 'bootstrap'
+
+gem 'sassc-rails'
+
+gem 'jquery-rails'
