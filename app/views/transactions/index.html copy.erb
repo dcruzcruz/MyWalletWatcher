@@ -36,7 +36,7 @@
         <td><%= transaction.amount %></td>
         <td><%= transaction.date %></td>
         <td><%= transaction.description %></td>
-        <td><%= transaction.categories.map(&:category_name).join(', ') if transaction.categories.present? %></td>
+        <td><%= transaction.categories.map(&:category_name).join(', ') %></td>
         <td><%= transaction.tags.map(&:tag_name).join(', ') %></td>
         <td>
           <%= link_to 'Show', transaction_path(transaction), class: 'btn btn-info' %>
