@@ -9,4 +9,8 @@ class Account < ApplicationRecord
   def update_balance!
     update(balance: transactions.sum(:amount))
   end
+
+  def self.search(query)
+    where("account_name LIKE ? OR balance LIKE ?", "%#{query}%", "%#{query}%")
+  end
 end
