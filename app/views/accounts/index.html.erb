@@ -1,10 +1,5 @@
 <h1>Accounts</h1>
-<%= form_tag(accounts_path, method: "get", class: "form-inline") do %>
-  <%= text_field_tag(:search, params[:search], placeholder: "Search by account name or balance", class: "form-control mr-2") %>
-  <%= select_tag(:household_member_id, options_for_select(@household_members.map { |hm| [hm.name, hm.id] }, params[:household_member_id]), include_blank: true, class: "form-control mr-2") %>
-  <%= submit_tag("Search", class: "btn btn-primary mr-2") %>
-  <%= link_to("Reset", accounts_path, class: "btn btn-secondary") %>
-<% end %>
+<%= paginate @accounts %>
 <table class="table">
   <thead>
     <tr>
@@ -20,7 +15,6 @@
         <td><%= account.household_member.name %></td>
         <td><%= link_to account.account_name, institution_path(account.institution_id),
         class: 'link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover' %></td>
-        <!--<td><%= account.account_name %></td>-->
         <td><%= account.balance %></td>
         <td>
           <%= link_to 'Show', account_path(account), class: 'btn btn-info' %>
@@ -35,3 +29,4 @@
     <% end %>
   </tbody>
 </table>
+</div>

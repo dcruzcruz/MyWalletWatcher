@@ -1,15 +1,8 @@
 <h1>Account Details</h1>
-
 <p><strong>Owner:</strong> <%= @account.household_member.name %></p>
 <p><strong>Name:</strong> <%= @account.account_name %></p>
 <p><strong>Balance:</strong> <%= @account.balance %></p>
-
-<!-- app/views/accounts/show.html.erb -->
-
 <h1><%= @account.account_name %></h1>
-
-<p>Balance: <%= number_to_currency(@account.balance) %></p>
-
 <% if @account.balance.positive? %>
   <p>This account has a positive balance. Good financial health!</p>
 <% elsif @account.balance.zero? %>
@@ -17,7 +10,6 @@
 <% else %>
   <p>This account has a negative balance. Take necessary actions!</p>
 <% end %>
-
 <%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back to Accounts', accounts_path %>
 

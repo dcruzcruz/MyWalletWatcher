@@ -13,11 +13,9 @@ class Institution < ApplicationRecord
       if result && result.key?("formatted_address")
         self.formatted_address = result["formatted_address"]
       else
-        # Handle the case where the key is not present
         self.formatted_address = "Address not available"
       end
     else
-      # Handle error
       self.formatted_address = "Error fetching address"
     end
   end

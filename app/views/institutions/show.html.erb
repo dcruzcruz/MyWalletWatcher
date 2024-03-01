@@ -1,13 +1,9 @@
-<!-- Add this script to load Google Maps API -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfkpN_ptGyFIcV05dzlTiIy5oEC1ayadk&callback=initMap" async defer></script>
-
-<!-- app/views/institutions/show.html.erb -->
 
 <h1><%= @institution.name %></h1>
 
 <div id="map" style="height: 400px;"></div>
 
-<!-- Corrected link to Google Maps -->
 <a target="_blank" href="https://www.google.com/maps/@<%= @institution.latitude %>,<%= @institution.longitude %>,14z">View on Google Maps</a>
 
 <script>
