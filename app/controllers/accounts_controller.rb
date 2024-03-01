@@ -2,9 +2,19 @@ class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   def index
-    #@accounts = Account.all
-    @accounts = Account.page(params[:page]).per(10)
-    @all_accounts = Account.all
+    #@accounts = Account.page(params[:page]).per(10)
+    #@all_accounts = Account.all
+    def index
+      @accounts = if params[:search]
+                    Account.search(params[:search]).paginate(page: params[:page], per_page: 10)
+                  elsif params[:household_member_id]
+                    Account.where(household_member_id: params[:household_member_id]).paginate(page: params[:page], per_page: 10)
+                  else
+                    Account.paginate(page: params[:page], per_page: 10)
+                  end
+
+      @household_members = HouseholdMember.all
+    end
   end
 
   def show
