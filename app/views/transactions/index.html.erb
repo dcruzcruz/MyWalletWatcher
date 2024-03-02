@@ -1,20 +1,21 @@
 <h1>Transactions</h1>
 
 <% unless params[:search].present? || params[:category].present? %>
-  <%= link_to 'New Transaction', new_transaction_path, class: 'btn btn-dark' %>
+
   <%= paginate @transactions %>
 <% end %>
 
-<%= form_tag(transactions_path, method: :get, class: 'form-inline mt-3') do %>
-  <%= text_field_tag :search, params[:search], class: 'form-control mr-sm-2', placeholder: 'Search by description' %>
-
-  <%= select_tag :category, options_for_select(Category.all.map { |c| [c.category_name, c.id] }, params[:category]), prompt: 'Select Category', class: 'form-control mr-sm-2' %>
-
-  <%= submit_tag 'Search', class: 'btn btn-outline-success my-2 my-sm-0' %>
-
-  <%= button_tag 'Reset', type: 'submit', class: 'btn btn-outline-secondary my-2 my-sm-0', onclick: 'resetForm()' %>
-<% end %>
-
+<div class="container mt-3" style="max-width: 80%;">
+  <%= form_tag(transactions_path, method: :get, class: 'text-center') do %>
+    <div class="input-group">
+      <%= link_to 'New Transaction', new_transaction_path, class: 'btn btn-primary' %>
+      <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: 'Search by description' %>
+      <%= select_tag :category, options_for_select(Category.all.map { |c| [c.category_name, c.id] }, params[:category]), prompt: 'Select Category', class: 'form-select' %>
+      <%= button_tag 'Search', type: 'submit', class: 'btn btn-success' %>
+      <%= button_tag 'Reset', type: 'submit', class: 'btn btn-secondary', onclick: 'resetForm()' %>
+    </div>
+  <% end %>
+</div>
 <script>
   function resetForm() {
     document.getElementById('search').value = '';
