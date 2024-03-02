@@ -11,7 +11,16 @@
   <%= select_tag :category, options_for_select(Category.all.map { |c| [c.category_name, c.id] }, params[:category]), prompt: 'Select Category', class: 'form-control mr-sm-2' %>
 
   <%= submit_tag 'Search', class: 'btn btn-outline-success my-2 my-sm-0' %>
+
+  <%= button_tag 'Reset', type: 'submit', class: 'btn btn-outline-secondary my-2 my-sm-0', onclick: 'resetForm()' %>
 <% end %>
+
+<script>
+  function resetForm() {
+    document.getElementById('search').value = '';
+    document.getElementById('category').value = '';
+  }
+</script>
 
 <table class="table">
   <thead>
