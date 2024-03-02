@@ -3,10 +3,9 @@ Rails.application.routes.draw do
   get 'about', to: 'pages#about'
 
   resources :accounts
-  #resources :transactions
+  resources :transactions
   resources :household_members
   resources :institutions
-
   resources :categories
   resources :tags
 
@@ -21,13 +20,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :transactions do
-    collection do
-      get :index, to: 'transactions#index'
-    end
-    resources :transaction_categories, only: [:index, :new, :create]
-    resources :transaction_tags, only: [:index, :new, :create]
-  end
   # Other routes...
 
   # Example of a non-resourceful route

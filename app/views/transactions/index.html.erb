@@ -1,15 +1,12 @@
 <h1>Transactions</h1>
 
-<% if params[:search].blank? && params[:category].blank? %>
+<% if params[:search].blank? %>
   <%= link_to 'New Transaction', new_transaction_path, class: 'btn btn-dark' %>
   <%= paginate @transactions %>
 <% end %>
 
 <%= form_tag(transactions_path, method: :get, class: 'form-inline mt-3') do %>
   <%= text_field_tag :search, params[:search], class: 'form-control mr-sm-2', placeholder: 'Search by description' %>
-
-  <%= select_tag :category, options_for_select(Category.pluck(:category_name, :id), params[:category]), include_blank: true, class: 'form-control mr-sm-2', prompt: 'Select Category' %>
-
   <%= submit_tag 'Search', class: 'btn btn-outline-success my-2 my-sm-0' %>
 <% end %>
 
@@ -36,7 +33,7 @@
         <td><%= transaction.amount %></td>
         <td><%= transaction.date %></td>
         <td><%= transaction.description %></td>
-
+        <td><%= transaction.categories.map(&:category_name).join(', ') %></td>
         <td><%= transaction.tags.map(&:tag_name).join(', ') %></td>
         <td>
           <%= link_to 'Show', transaction_path(transaction), class: 'btn btn-info' %>

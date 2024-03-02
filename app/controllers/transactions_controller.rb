@@ -2,8 +2,8 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:search].present? || params[:category].present?
-      @transactions = Transaction.includes(:categories).where('transactions.description LIKE ? AND transaction_categories.category_id = ?', "%#{params[:search]}%", params[:category])
+    if params[:search].present?
+      @transactions = Transaction.where('description LIKE ?', "%#{params[:search]}%")
     else
       @transactions = Transaction.page(params[:page]).per(10)
     end
@@ -50,17 +50,20 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.find(params[:id])
   end
 
-def transaction_params
-  params.require(:transaction).permit(
-    :household_member_id,
-    :account_id,
-    :transaction_type,
-    :amount,
-    :date,
-    :description,
-    transaction_categories_attributes: [:id, :category_id],
-    transaction_tags_attributes: [:id, :tag_id]
-  )
-end
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
 
+  def transaction_params
+    params.require(:transaction).permit(
+      :household_member_id,
+      :account_id,
+      :transaction_type,
+      :amount,
+      :date,
+      :description,
+      transaction_categories_attributes: [:id, :category_id],
+      transaction_tags_attributes: [:id, :tag_id]
+    )
+  end
 end
